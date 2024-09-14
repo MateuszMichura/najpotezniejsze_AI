@@ -69,7 +69,7 @@ async function collectBlock(blockType, num = 1) {
     try {
         const blocks = bot.findBlocks({
             matching: block => block.name === blockType,
-            maxDistance: 320,
+            maxDistance: 32,
             count: num
         });
 
@@ -286,21 +286,18 @@ async function clearNearestFurnace(bot) {
     return true;
 }
 
-async function attackNearestMob(bot, specificType = null) {
-    const entity = bot.nearestEntity(e => {
-        if (e.type !== 'mob' && e.type !== 'animal') return false;
-        if (specificType && e.name.toLowerCase() !== specificType.toLowerCase()) return false;
-        return true;
-    });
-
+async function attackNearestMob(bot) {
+    const entity = bot.nearestEntity(e => e.type === 'mob' || e.type === 'animal' || e.type === 'monster');
     if (!entity) {
-        bot.chat(specificType ? `Nie znaleziono moba typu ${specificType} w pobliżu.` : "Nie znaleziono żadnego moba w pobliżu.");
+        bot.chat("Nie znaleziono żadnego moba w pobliżu.");
         return { success: false, error: "Nie znaleziono moba do ataku." };
     }
     
     try {
         bot.chat(`Znaleziono moba: ${entity.name} w odległości ${bot.entity.position.distanceTo(entity.position)} bloków.`);
-        await approachAndAttackUntilDead(bot, entity);
+        await bot.pathfinder.goto(new GoalNear(entity.position.x, entity.position.y, entity.position.z, 2));
+        await bot.lookAt(entity.position.offset(0, entity.height, 0));
+        await bot.attack(entity);
         return { success: true, attackedMob: entity.name };
     } catch (error) {
         console.error(error.stack);
@@ -308,22 +305,30 @@ async function attackNearestMob(bot, specificType = null) {
     }
 }
 
-async function approachAndAttackUntilDead(bot, entity) {
-    while (entity.isValid && bot.entity.health > 0) {
-        if (bot.entity.position.distanceTo(entity.position) > 3) {
-            await bot.pathfinder.goto(new GoalNear(entity.position.x, entity.position.y, entity.position.z, 2));
-        }
-        await bot.lookAt(entity.position.offset(0, entity.height, 0));
-        await bot.attack(entity);
-        await new Promise(resolve => setTimeout(resolve, 500));
-    }
+async function attackEntity(bot, entity, kill = true) {
+    let pos = entity.position;
     
-    if (!entity.isValid) {
+    if (bot.entity.position.distanceTo(pos) > 5) {
+        console.log('Podchodzenie do moba...');
+        await bot.pathfinder.goto(new GoalNear(pos.x, pos.y, pos.z, 2));
+    }
+
+    if (!kill) {
+        console.log('Atakowanie moba tylko raz...');
+        await bot.attack(entity);
+    } else {
+        console.log('Atakowanie moba aż do jego śmierci...');
+        while (entity.isValid && bot.entity.health > 0) {
+            if (bot.entity.position.distanceTo(entity.position) > 3) {
+                await bot.pathfinder.goto(new GoalNear(entity.position.x, entity.position.y, entity.position.z, 2));
+            }
+            await bot.attack(entity);
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
         log(bot, `Zabiłem ${entity.name}.`, true);
         await pickupNearbyItems(bot);
-    } else {
-        log(bot, `Przerwano atak na ${entity.name}.`, true);
     }
+    return true;
 }
 
 async function defendSelf(bot, range=9) {
@@ -433,7 +438,7 @@ bot.on('chat', async (username, message) => {
                     - Gracz: "Wyczyść piec"
                       Ty: "!wyczyść_piec"
                     - Gracz: "Zaatakuj najbliższego szkieleta"
-                      Ty: "!atakuj_moba skeleton"
+                      Ty: "!atakuj_moba"
                     - Gracz: "Zbierz przedmioty leżące dookoła"
                       Ty: "!zbierz_przedmioty"
                     - Gracz: "Postaw blok kamienia obok mnie"
@@ -519,21 +524,11 @@ bot.on('chat', async (username, message) => {
                     await clearNearestFurnace(bot);
                     break;
                 case 'atakuj_moba':
-                    if (args.length > 0) {
-                        const mobType = args.join('_');
-                        const result = await attackNearestMob(bot, mobType);
-                        if (result.success) {
-                            bot.chat(`Zaatakowałem ${result.attackedMob}.`);
-                        } else {
-                            bot.chat(result.error);
-                        }
+                    const result = await attackNearestMob(bot);
+                    if (result.success) {
+                        bot.chat(`Zaatakowałem ${result.attackedMob}.`);
                     } else {
-                        const result = await attackNearestMob(bot);
-                        if (result.success) {
-                            bot.chat(`Zaatakowałem najbliższego moba: ${result.attackedMob}.`);
-                        } else {
-                            bot.chat(result.error);
-                        }
+                        bot.chat(result.error);
                     }
                     break;
                 case 'atakuj_jednostkę':
