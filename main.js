@@ -1,12 +1,14 @@
 const mineflayer = require("mineflayer");
 const axios = require("axios");
+
+require("dotenv").config();
+
 const {
   pathfinder,
   Movements,
   goals: { GoalNear },
 } = require("mineflayer-pathfinder");
 const Vec3 = require("vec3");
-require("dotenv").config();
 
 const BOT_USERNAME = process.env.BOT_USERNAME;
 const BOT_HOST = process.env.BOT_HOST;
