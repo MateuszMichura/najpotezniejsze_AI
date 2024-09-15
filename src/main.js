@@ -713,7 +713,9 @@ bot.on('chat', async (username, message) => {
       apiTimer = Date.now()
 
       const botResponse = await sendRequest(
-        objective === 'brak' ? message : '',
+        objective === 'brak'
+          ? message
+          : 'Kontynuuj działanie na bazie historii',
         systemContent
       )
 
