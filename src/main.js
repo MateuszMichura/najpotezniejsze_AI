@@ -699,23 +699,15 @@ bot.on('chat', async (username, message) => {
       console.log('History: ', history)
       console.log('HistoryText: ', historyText)
 
+      const fileContent = fs.readFileSync('./content.txt', 'utf-8')
+
       const response = await axios.post(
         GROQ_API_ENDPOINT,
         {
           messages: [
             {
               role: 'system',
-              content:await fs.readFile('content.txt','utf-8',function(err,data){
-                console.log(data)
-              })
-
-                     +
-                //Dostępne do skraftowania przedmioty: ${reciepiesToCraft}
-                `
-                    Twój ekwipunek: ${inventory}
-                    Historia: ${historyText}
-                    Cel: ${objective}
-                    `,
+              content: fileContent,
             },
             {
               role: 'user',
