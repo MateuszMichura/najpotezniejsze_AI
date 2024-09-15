@@ -1,2 +1,13 @@
 node_modules
 .env
+
+
+mc-server/logs
+mc-server/libraries
+mc-server/versions
+mc-server/world
+mc-server/world_nether
+mc-server/world_the_end
+mc-server/cache
+mc-server/.console_history
+mc-server/usercache.json
