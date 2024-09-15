@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "dev": "node src/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/main.ts"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +15,9 @@
     "mineflayer": "^4.20.1",
     "mineflayer-pathfinder": "^2.4.5",
     "vec3": "^0.1.10"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
   }
 }
