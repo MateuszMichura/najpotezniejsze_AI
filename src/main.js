@@ -10,6 +10,7 @@ const Vec3 = require('vec3')
 const fs = require('fs')
 const { sendRequest } = require('./api')
 const { moveToPlayer } = require('./bot/actions/moveToPlayer')
+const { placeBlock } = require('./bot/actions/place-block')
 
 const BOT_USERNAME = 'Lama'
 const BOT_HOST = '136.243.134.246'
@@ -820,7 +821,7 @@ bot.on('chat', async (username, message) => {
             break
           case 'umieść_blok':
             // Implementacja umieszczania bloku
-
+            actionResult = await placeBlock(bot, args[0])
             break
           case 'wyposażenie':
             // Implementacja wyposażania
