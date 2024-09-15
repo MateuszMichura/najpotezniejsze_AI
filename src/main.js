@@ -9,6 +9,7 @@ const {
 const Vec3 = require('vec3')
 const fs = require('fs')
 const { sendRequest } = require('./api')
+const { moveToPlayer } = require('./bot/actions/moveToPlayer')
 
 const BOT_USERNAME = 'Lama'
 const BOT_HOST = '136.243.134.246'
@@ -80,11 +81,6 @@ function findNearestPlayer() {
   }
 
   return nearestPlayer
-}
-
-function moveToPlayer(player) {
-  const { x, y, z } = player.entity.position
-  bot.pathfinder.setGoal(new GoalNear(x, y, z, RANGE_GOAL))
 }
 
 async function collectBlock(blockType, num = 1) {
@@ -824,6 +820,7 @@ bot.on('chat', async (username, message) => {
             break
           case 'umieść_blok':
             // Implementacja umieszczania bloku
+
             break
           case 'wyposażenie':
             // Implementacja wyposażania
