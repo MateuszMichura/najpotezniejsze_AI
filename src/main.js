@@ -8,11 +8,14 @@ const {
 const Vec3 = require('vec3')
 const fs = require('fs')
 
+require('dotenv').config()
+
 const BOT_USERNAME = 'Lama'
 const BOT_HOST = '136.243.134.246'
 const BOT_PORT = '38210'
-const GROQ_API_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions'
-const GROQ_API_KEY = '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'
+const GROQ_API_ENDPOINT = process.env.GROQ_API_ENDPOINT
+const GROQ_API_KEY = process.env.GROQ_API_KEY
+
 const RANGE_GOAL = 1
 
 const bot = mineflayer.createBot({
