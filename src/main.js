@@ -706,7 +706,7 @@ bot.on('chat', async (username, message) => {
         )
         .join('; ')
 
-      const requestContent =
+      const systemContent =
         fileContent + `\nEkwipunek ${inventory}\nHistoria: ${historyText}`
 
       if (Date.now() - apiTimer < 2000) await sleep(2000)
@@ -714,14 +714,21 @@ bot.on('chat', async (username, message) => {
 
       const botResponse = await sendRequest(
         objective === 'brak' ? message : '',
-        requestContent
+        systemContent
       )
+
+      if (!botResponse) {
+        return bot.chat('Nie udało się zrealizować akcji.')
+      }
 
       console.log(`[Bot]: ${botResponse}`)
       bot.chat(botResponse)
 
-      if (botResponse.startsWith('!')) {
-        const [command, ...args] = botResponse.slice(1).split(' ')
+      if (botResponse.startsWith('!') || botResponse.startsWith('`!')) {
+        const [command, ...args] = botResponse
+          .replaceAll('`', '')
+          .slice(1)
+          .split(' ')
 
         actionResult = 'Nie udało się zrealizować akcji.'
 

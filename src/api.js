@@ -44,6 +44,6 @@ module.exports.sendRequest = async (userMessage, systemMessage) => {
   } catch (err) {
     console.log('Api error: ', err)
 
-    return err
+    return false
   }
 }
