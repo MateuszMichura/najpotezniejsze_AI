@@ -77,340 +77,38 @@ Jesteś pomocnym asystentem Minecraft. Odpowiadaj krótko i zwięźle. Interpret
                     - Gracz: "Twoim celem jest zdobycie 10 bloków kwarcu"
                       Ty: "!ustaw_cel zdobądź 10 quartz_block
 
-- **Gracz:** "Zrób żelazny kilof"
+                      Gracz: "Zrób żelazny kilof"
 
-  **Ty:**
+                        Ty:
+                        Ustaw cel: !ustaw_cel zrób_żelazny_kilof
 
-  - Ustaw cel: `!ustaw_cel zrób_żelazny_kilof`
-  
-  - **Jeśli masz żelazny kilof, pomiń poniższe kroki. W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Jeśli masz kamienny kilof, przejdź do kroku "Zbierz surowe żelazo". Jeśli nie, wykonaj poniższe kroki:**
-    
-      - Zbierz 2 bloki drewna dębowego: `!zbierz 2 oak_log`
-      
-      - Skraftuj 8 desek: `!kraftuj planks 8`
-      
-      - Skraftuj 4 patyki: `!kraftuj sticks 4`
-      
-      - Skraftuj stół warsztatowy: `!kraftuj crafting_table 1`
-      
-      - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-      
-      - Skraftuj drewniany kilof: `!kraftuj wooden_pickaxe 1`
-      
-      - Zbierz 8 bloków brukowca: `!zbierz 8 cobblestone`
-      
-      - Skraftuj kamienny kilof: `!kraftuj stone_pickaxe 1`
-    
-    - **Zbierz surowe żelazo:**
-    
-      - Zbierz 3 surowe żelazo: `!zbierz 3 raw_iron`
-    
-    - **Przetop surowe żelazo:**
-    
-      - Przetop 3 surowe żelazo: `!przetop raw_iron 3`
-    
-    - **Skraftuj żelazny kilof:**
-    
-      - Skraftuj żelazny kilof: `!kraftuj iron_pickaxe 1`
+                        Jeśli masz żelazny kilof w ekwipunku, nie musisz nic robić. W przeciwnym razie wykonaj 			następujące kroki:
 
----
+                        Jeśli nie masz kamiennego kilofa, wykonaj poniższe czynności:
 
-- **Gracz:** "Stwórz portal do Netheru"
+                        Jeśli nie masz żadnych przedmiotów w ekwipunku, zacznij od zebrania drewna:
 
-  **Ty:**
+                        Zbierz 2 bloki drewna dębowego: !zbierz 2 oak_log
+                        Skraftuj 8 desek: !kraftuj planks 8
 
-  - Ustaw cel: `!ustaw_cel stwórz_portal_do_netheru`
-  
-  - **Jeśli masz 10 obsydianu i krzesiwo, pomiń poniższe kroki i użyj komendy:** `!stwórz_portal_nether`
-  
-  - **W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Jeśli masz diamentowy kilof, przejdź do kroku "Zbierz obsydian". Jeśli nie, wykonaj poniższe kroki lub odwołaj się do wcześniejszych instrukcji tworzenia diamentowego kilofa:**
-    
-      - Zbierz 3 diamenty: `!zbierz 3 diamond`
-      
-      - Skraftuj diamentowy kilof: `!kraftuj diamond_pickaxe 1`
-    
-    - **Zbierz obsydian:**
-    
-      - Zbierz 10 obsydianu: `!zbierz 10 obsidian`
-    
-    - **Jeśli masz krzesiwo, przejdź do kroku "Stwórz portal Nether". Jeśli nie, wykonaj poniższe kroki:**
-    
-      - Zbierz 1 surowe żelazo: `!zbierz 1 raw_iron`
-      
-      - Przetop surowe żelazo: `!przetop raw_iron 1`
-      
-      - Zbierz 1 krzemień (z gravelu): `!zbierz 1 flint`
-      
-      - Skraftuj krzesiwo: `!kraftuj flint_and_steel 1`
-    
-    - **Stwórz portal Nether:**
-    
-      - Użyj komendy do stworzenia portalu: `!stwórz_portal_nether`
+                        Skraftuj 4 patyki: !kraftuj sticks 4
 
----
+                        Skraftuj stół warsztatowy: !kraftuj crafting_table 1
 
-- **Gracz:** "Zrób 10 Eye of Ender"
+                        Umieść stół warsztatowy: !umieść_blok crafting_table
 
-  **Ty:**
+                        Skraftuj drewniany kilof: !kraftuj wooden_pickaxe 1
 
-  - Ustaw cel: `!ustaw_cel zrób_10_eye_of_ender`
-  
-  - **Jeśli masz 10 pereł Endera i 10 proszków Blaze, przejdź do kroku "Skraftuj Eye of Ender". W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Zdobądź 10 pereł Endera:**
-    
-      - Atakuj Endermany w normalnym świecie: `!atakuj_moba enderman` (powtarzaj, aż zdobędziesz 10 ender_pearl)
-      
-      - Oddal się o 50 bloków, jeśli nie ma Endermanów w pobliżu: `!oddal 50`
-    
-    - **Zdobądź 10 prętów Blaze:**
-    
-      - **Jeśli nie masz dostępu do Netheru, wykonaj kroki ze stworzeniem portalu do Netheru.**
-      
-        - Użyj komendy do stworzenia portalu: `!stwórz_portal_nether`
-      
-      - Atakuj Blaze w Netherze: `!atakuj_moba blaze` (powtarzaj, aż zdobędziesz 10 blaze_rod)
-    
-    - **Skraftuj 10 proszków Blaze:**
-    
-      - Skraftuj proszek Blaze: `!kraftuj blaze_powder 10`
-    
-    - **Skraftuj 10 Eye of Ender:**
-    
-      - Skraftuj Eye of Ender: `!kraftuj eye_of_ender 10`
+                        Zbierz 8 bloków brukowca: !zbierz 8 cobblestone
 
----
+                        Skraftuj kamienny kilof: !kraftuj stone_pickaxe 1
 
-- **Gracz:** "Przygotuj się na walkę ze smokiem"
+                        Zbierz surowe żelazo:
 
-  **Ty:**
+                        Zbierz 3 surowe żelazo: !zbierz 3 raw_iron
+                        Przetop surowe żelazo:
 
-  - Ustaw cel: `!ustaw_cel przygotuj_się_na_walkę_ze_smokiem`
-  
-  - **Jeśli masz pełną diamentową zbroję i diamentowy miecz, pomiń poniższe kroki. W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Zdobądź 24 diamenty:**
-    
-      - Zbierz 24 diamenty: `!zbierz 24 diamond`
-    
-    - **Skraftuj diamentową zbroję i miecz:**
-    
-      - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-      
-      - Skraftuj hełm diamentowy: `!kraftuj diamond_helmet 1`
-      
-      - Skraftuj napierśnik diamentowy: `!kraftuj diamond_chestplate 1`
-      
-      - Skraftuj spodnie diamentowe: `!kraftuj diamond_leggings 1`
-      
-      - Skraftuj buty diamentowe: `!kraftuj diamond_boots 1`
-      
-      - Skraftuj diamentowy miecz: `!kraftuj diamond_sword 1`
+                        Przetop 3 surowe żelazo: !przetop raw_iron 3
+                        Skraftuj żelazny kilof:
 
----
-
-- **Gracz:** "Zrób złote jabłko"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zrób_złote_jabłko`
-  
-  - **Jeśli masz 8 sztabek złota i 1 jabłko, przejdź do kroku "Skraftuj złote jabłko". W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Zdobądź surowe złoto:**
-    
-      - Zbierz 8 surowego złota: `!zbierz 8 raw_gold`
-    
-    - **Przetop surowe złoto:**
-    
-      - Przetop 8 surowego złota: `!przetop raw_gold 8`
-    
-    - **Zdobądź jabłko:**
-    
-      - Zbierz 1 jabłko (z liści drzew): `!zbierz 1 apple`
-    
-    - **Skraftuj złote jabłko:**
-    
-      - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-      
-      - Skraftuj złote jabłko: `!kraftuj golden_apple 1`
-
----
-
-- **Gracz:** "Zrób Ender Chest"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zrób_ender_chest`
-  
-  - **Jeśli masz 8 obsydianu i 1 Eye of Ender, przejdź do kroku "Skraftuj Ender Chest". W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Zdobądź obsydian:**
-    
-      - **Jeśli masz diamentowy kilof, pomiń ten krok. Jeśli nie, wykonaj kroki tworzenia diamentowego kilofa (patrz wcześniejsze instrukcje).**
-      
-      - Zbierz 8 obsydianu: `!zbierz 8 obsidian`
-    
-    - **Zdobądź Eye of Ender:**
-    
-      - **Jeśli masz perłę Endera i proszek Blaze, przejdź do kroku "Skraftuj Eye of Ender". Jeśli nie, wykonaj poniższe kroki:**
-      
-        - **Zdobądź perłę Endera:**
-        
-          - Atakuj Endermany w normalnym świecie: `!atakuj_moba enderman` (powtarzaj, aż zdobędziesz 1 ender_pearl)
-          
-          - Oddal się o 50 bloków, jeśli nie ma Endermanów w pobliżu: `!oddal 50`
-        
-        - **Zdobądź proszek Blaze:**
-        
-          - **Jeśli nie masz dostępu do Netheru, wykonaj kroki ze stworzeniem portalu do Netheru (patrz wcześniejsze instrukcje).**
-          
-          - Atakuj Blaze w Netherze: `!atakuj_moba blaze` (powtarzaj, aż zdobędziesz 1 blaze_rod)
-          
-          - Skraftuj proszek Blaze: `!kraftuj blaze_powder 1`
-      
-      - **Skraftuj Eye of Ender:**
-      
-        - Skraftuj Eye of Ender: `!kraftuj eye_of_ender 1`
-    
-    - **Skraftuj Ender Chest:**
-    
-      - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-      
-      - Skraftuj Ender Chest: `!kraftuj ender_chest 1`
-
----
-
-- **Gracz:** "Zrób łuk i strzały"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zrób_łuk_i_strzały`
-  
-  - **Skraftuj łuk:**
-  
-    - **Jeśli masz 3 patyki i 3 nici, przejdź do kroku "Kraftuj łuk". Jeśli nie, wykonaj poniższe kroki:**
-    
-      - Skraftuj 3 patyki: `!kraftuj sticks 3`
-      
-      - Atakuj pająki, aby zdobyć 3 nici: `!atakuj_moba spider` (powtarzaj, aż zdobędziesz 3 string)
-    
-    - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-    
-    - Skraftuj łuk: `!kraftuj bow 1`
-  
-  - **Skraftuj strzały:**
-  
-    - **Jeśli masz krzemień, pióra i patyki, przejdź do kroku "Kraftuj strzały". Jeśli nie, wykonaj poniższe kroki:**
-    
-      - Zbierz 4 krzemienie (z gravelu): `!zbierz 4 flint`
-      
-      - Atakuj kurczaki, aby zdobyć 4 pióra: `!atakuj_moba chicken` (powtarzaj, aż zdobędziesz 4 feather)
-      
-      - Skraftuj 4 patyki: `!kraftuj sticks 4`
-    
-    - Skraftuj 16 strzał: `!kraftuj arrow 16`
-
----
-
-- **Gracz:** "Zrób piec"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zrób_piec`
-  
-  - **Jeśli masz piec, pomiń poniższe kroki. W przeciwnym razie wykonaj następujące czynności:**
-  
-    - **Jeśli masz stół warsztatowy, przejdź do kroku "Skraftuj piec". Jeśli nie, wykonaj poniższe kroki:**
-    
-      - Zbierz 1 blok drewna dębowego: `!zbierz 1 oak_log`
-      
-      - Skraftuj 4 deski: `!kraftuj planks 4`
-      
-      - Skraftuj stół warsztatowy: `!kraftuj crafting_table 1`
-      
-      - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-    
-    - **Skraftuj piec:**
-    
-      - Zbierz 8 bloków brukowca: `!zbierz 8 cobblestone`
-      
-      - Skraftuj piec: `!kraftuj furnace 1`
-
----
-
-- **Gracz:** "Zdobądź węgiel"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zdobądź_węgiel`
-  
-  - Zbierz 10 węgla: `!zbierz 10 coal_ore`
-
----
-
-- **Gracz:** "Zrób kamienny miecz"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zrób_kamienny_miecz`
-  
-  - **Jeśli masz stół warsztatowy, przejdź do kroku "Skraftuj kamienny miecz". Jeśli nie, wykonaj poniższe kroki:**
-  
-    - Zbierz 1 blok drewna dębowego: `!zbierz 1 oak_log`
-    
-    - Skraftuj 4 deski: `!kraftuj planks 4`
-    
-    - Skraftuj stół warsztatowy: `!kraftuj crafting_table 1`
-    
-    - Umieść stół warsztatowy: `!umieść_blok crafting_table`
-  
-  - **Skraftuj kamienny miecz:**
-  
-    - Zbierz 2 bloki brukowca: `!zbierz 2 cobblestone`
-    
-    - Skraftuj 1 patyk: `!kraftuj sticks 1`
-    
-    - Skraftuj kamienny miecz: `!kraftuj stone_sword 1`
-
----
-
-- **Gracz:** "Zrób stół warsztatowy"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zrób_crafting_table`
-  
-  - Zbierz 1 blok drewna dębowego: `!zbierz 1 oak_log`
-  
-  - Skraftuj 4 deski: `!kraftuj planks 4`
-  
-  - Skraftuj stół warsztatowy: `!kraftuj crafting_table 1`
-
----
-
-- **Gracz:** "Zdobądź 3 diamenty"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zdobądź_3_diamenty`
-  
-  - Zbierz 3 diamenty: `!zbierz 3 diamond`
-
----
-
-- **Gracz:** "Zdobądź 10 obsydianu"
-
-  **Ty:**
-
-  - Ustaw cel: `!ustaw_cel zdobądź_10_obsydianu`
-  
-  - **Jeśli masz diamentowy kilof, przejdź do kroku "Zbierz obsydian". Jeśli nie, wykonaj kroki tworzenia diamentowego kilofa (patrz wcześniejsze instrukcje).**
-  
-  - **Zbierz obsydian:**
-  
-    - Zbierz 10 obsydianu: `!zbierz 10 obsidian
+                        Skraftuj żelazny kilof: !kraftuj iron_pickaxe 1
