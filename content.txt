@@ -88,8 +88,8 @@ Jesteś pomocnym asystentem Minecraft. Odpowiadaj krótko i zwięźle. Interpret
 
                         Jeśli nie masz żadnych przedmiotów w ekwipunku, zacznij od zebrania drewna:
 
-                        Zbierz 2 bloki drewna dębowego: !zbierz 2 oak_log
-                        Skraftuj 8 desek: !kraftuj planks 8
+                        Zbierz 2 bloki drewna dębowego: !zbierz 2 
+                        Skraftuj 8 desek: !kraftuj oak_planks 8
 
                         Skraftuj 4 patyki: !kraftuj sticks 4
 
