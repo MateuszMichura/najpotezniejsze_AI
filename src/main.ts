@@ -8,7 +8,7 @@ const { GoalNear } = goals
 
 import fs from 'fs'
 
-import { sendRequest } from './api'
+import { sendRequest } from './bot/api/api'
 import { Vec3 } from 'vec3'
 
 import {
