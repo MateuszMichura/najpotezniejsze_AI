@@ -1,5 +1,6 @@
+require('dotenv').config() //Musi byc jako pierwsze
+
 const mineflayer = require('mineflayer')
-const axios = require('axios')
 const {
   pathfinder,
   Movements,
@@ -7,8 +8,7 @@ const {
 } = require('mineflayer-pathfinder')
 const Vec3 = require('vec3')
 const fs = require('fs')
-
-require('dotenv').config()
+const { sendRequest } = require('./api')
 
 const BOT_USERNAME = 'Lama'
 const BOT_HOST = '136.243.134.246'
@@ -27,11 +27,15 @@ const bot = mineflayer.createBot({
 
 bot.loadPlugin(pathfinder)
 
-const history = []
+const fileContent = fs.readFileSync('./content.txt', 'utf-8') // Treść pliku content.txt
+const history = [] // Historia komunikacji z botem
+let apiTimer = Date.now() // Timer do ograniczenia zapytań do API
 
 function log(bot, message, chat = false) {
   console.log(message)
   if (chat) bot.chat(message)
+
+  return message
 }
 
 async function sleep(ms) {
@@ -92,8 +96,7 @@ async function collectBlock(blockType, num = 1) {
     })
 
     if (blocks.length === 0) {
-      bot.chat(`Nie mogę znaleźć ${blockType} w pobliżu.`)
-      return
+      return log(bot, `Nie mogę znaleźć ${blockType} w pobliżu.`, true)
     }
 
     let collected = 0
@@ -101,16 +104,22 @@ async function collectBlock(blockType, num = 1) {
       if (collected >= num) break
 
       await bot.pathfinder.goto(
-        new GoalNear(blockPos.x, blockPos.y, blockPos.z, 1)
+        new GoalNear(blockPos.x, blockPos.y, blockPos.z, 2)
       )
-      await bot.dig(bot.blockAt(blockPos))
-      collected++
+
+      if (bot.canDigBlock(bot.blockAt(blockPos))) {
+        await bot.dig(bot.blockAt(blockPos))
+        collected++
+      } else return log(bot, `Nie mogę zebrać ${blockType}.`, true)
     }
 
-    bot.chat(`Zebrałem ${collected} ${blockType}.`)
+    return log(bot, `Zebrałem ${collected} ${blockType}.`, true)
   } catch (error) {
     console.error('Błąd podczas zbierania bloku:', error)
-    bot.chat('Wystąpił błąd podczas zbierania bloku.')
+    const message = 'Wystąpił błąd podczas zbierania bloku.'
+    bot.chat(message)
+
+    return message
   }
 }
 
@@ -153,12 +162,11 @@ async function craftRecipe(bot, itemName, num = 1) {
           placedTable = true
         }
       } else {
-        log(
+        return log(
           bot,
           `You either do not have enough resources to craft ${itemName} or it requires a crafting table.`,
           true
         )
-        return false
       }
     } else {
       recipes = bot.recipesFor(
@@ -170,11 +178,14 @@ async function craftRecipe(bot, itemName, num = 1) {
     }
   }
   if (!recipes || recipes.length === 0) {
-    log(bot, `You do not have the resources to craft a ${itemName}.`, true)
     if (placedTable) {
       await collectBlock('crafting_table', 1)
     }
-    return false
+    return log(
+      bot,
+      `You either do not have enough resources to craft ${itemName} or it requires a crafting table.`,
+      true
+    )
   }
 
   if (
@@ -194,17 +205,15 @@ async function craftRecipe(bot, itemName, num = 1) {
   const recipe = recipes[0]
   console.log('crafting...')
   await bot.craft(recipe, num, craftingTable)
-  log(
-    bot,
-    `Successfully crafted ${itemName}, you now have ${bot.inventory.count(
-      itemName
-    )} ${itemName}.`,
-    true
-  )
+
   if (placedTable) {
     await collectBlock('crafting_table', 1)
   }
-  return true
+
+  const craftedItemMessage = `Successfully crafted ${itemName}, you now have ${bot.inventory.count(
+    itemName
+  )} ${itemName}.`
+  return log(bot, craftedItemMessage, true)
 }
 
 async function smeltItem(bot, itemName, num = 1) {
@@ -220,12 +229,11 @@ async function smeltItem(bot, itemName, num = 1) {
       'tropical_fish',
     ]
     if (!itemName.includes('raw') && !foods.includes(itemName)) {
-      log(
+      return log(
         bot,
         `Cannot smelt ${itemName}, must be a "raw" item, like "raw_iron".`,
         true
       )
-      return `Cannot smelt ${itemName}, must be a "raw" item, like "raw_iron".`
     }
 
     let placedFurnace = false
@@ -250,8 +258,11 @@ async function smeltItem(bot, itemName, num = 1) {
       }
     }
     if (!furnaceBlock) {
-      log(bot, `There is no furnace nearby and you have no furnace.`, true)
-      return `There is no furnace nearby and you have no furnace.`
+      return log(
+        bot,
+        `There is no furnace nearby and you have no furnace.`,
+        true
+      )
     }
     if (bot.entity.position.distanceTo(furnaceBlock.position) > 4) {
       await bot.pathfinder.goto(
@@ -274,18 +285,20 @@ async function smeltItem(bot, itemName, num = 1) {
     console.log(input_item)
 
     if (input_item && input_item.name !== itemName && input_item.count > 0) {
-      log(bot, `The furnace is currently smelting ${input_item.name}.`, true)
       if (placedFurnace) await collectBlock('furnace', 1)
-      return false
+      return log(
+        bot,
+        `The furnace is currently smelting ${input_item.name}.`,
+        true
+      )
     }
     let inv_counts = bot.inventory.items().reduce((acc, item) => {
       acc[item.name] = (acc[item.name] || 0) + item.count
       return acc
     }, {})
     if (!inv_counts[itemName] || inv_counts[itemName] < num) {
-      log(bot, `You do not have enough ${itemName} to smelt.`, true)
       if (placedFurnace) await collectBlock('furnace', 1)
-      return false
+      return log(bot, `You do not have enough ${itemName} to smelt.`, true)
     }
 
     if (!furnace.fuelItem()) {
@@ -294,17 +307,15 @@ async function smeltItem(bot, itemName, num = 1) {
         .find(item => item.name === 'coal' || item.name === 'charcoal')
       let put_fuel = Math.ceil(num / 8)
       if (!fuel || fuel.count < put_fuel) {
-        log(
+        if (placedFurnace) await collectBlock('furnace', 1)
+        return log(
           bot,
           `You do not have enough coal or charcoal to smelt ${num} ${itemName}, you need ${put_fuel} coal or charcoal`,
           true
         )
-        if (placedFurnace) await collectBlock('furnace', 1)
-        return false
       }
       await furnace.putFuel(fuel.type, null, put_fuel)
       log(bot, `Added ${put_fuel} ${fuel.name} to furnace fuel.`, true)
-      console.log(`Added ${put_fuel} ${fuel.name} to furnace fuel.`)
     }
     console.log(`putting ${num} ${itemName} into furnace...`)
     await furnace.putInput(bot.registry.itemsByName[itemName].id, null, num)
@@ -335,25 +346,23 @@ async function smeltItem(bot, itemName, num = 1) {
       await collectBlock('furnace', 1)
     }
     if (total === 0) {
-      log(bot, `Failed to smelt ${itemName}.`, true)
-      return false
+      return log(bot, `Failed to smelt ${itemName}.`, true)
     }
     if (total < num) {
-      log(bot, `Only smelted ${total} ${smelted_item.name}.`, true)
-      return false
+      return log(bot, `Only smelted ${total} ${smelted_item.name}.`, true)
     }
-    log(
+
+    return log(
       bot,
       `Successfully smelted ${itemName}, got ${total} ${smelted_item.name}.`,
       true
     )
-    return true
   } catch (error) {
     console.error('Błąd podczas przetapiania przedmiotu:', error)
     bot.chat('Wystąpił błąd podczas przetapiania przedmiotu.')
-  }
 
-  return false
+    return 'Wystąpił błąd podczas przetapiania przedmiotu.'
+  }
 }
 
 async function clearNearestFurnace(bot) {
@@ -362,8 +371,7 @@ async function clearNearestFurnace(bot) {
     maxDistance: 6,
   })
   if (!furnaceBlock) {
-    log(bot, `There is no furnace nearby.`, true)
-    return false
+    return log(bot, `There is no furnace nearby.`, true)
   }
 
   console.log('clearing furnace...')
@@ -383,12 +391,12 @@ async function clearNearestFurnace(bot) {
   let fuel_name = fuel_item
     ? `${fuel_item.count} ${fuel_item.name}`
     : `0 fuel items`
-  log(
+
+  return log(
     bot,
     `Cleared furnace, received ${smelted_name}, ${input_name}, and ${fuel_name}.`,
     true
   )
-  return true
 }
 
 async function attackNearestMob(bot, specificType = null) {
@@ -439,10 +447,11 @@ async function approachAndAttackUntilDead(bot, entity) {
   console.log('entity: ', entity)
 
   if (!entity.isValid) {
-    log(bot, `Zabiłem ${entity.name}.`, true)
     await pickupNearbyItems(bot)
+
+    return log(bot, `Zabiłem ${entity.name}.`, true)
   } else {
-    log(bot, `Przerwano atak na ${entity.name}.`, true)
+    return log(bot, `Przerwano atak na ${entity.name}.`, true)
   }
 }
 
@@ -479,11 +488,10 @@ async function defendSelf(bot, range = 9) {
     )
   }
   if (attacked) {
-    log(bot, `Obroniłem się przed atakiem.`, true)
+    return log(bot, `Obroniłem się przed atakiem.`, true)
   } else {
-    log(bot, `Nie znalazłem żadnych wrogów w pobliżu.`, true)
+    return log(bot, `Nie znalazłem żadnych wrogów w pobliżu.`, true)
   }
-  return attacked
 }
 
 async function pickupNearbyItems(bot) {
@@ -514,8 +522,8 @@ async function pickupNearbyItems(bot) {
     }
     pickedUp++
   }
-  log(bot, `Picked up ${pickedUp} items.`, true)
-  return true
+
+  return log(bot, `Picked up ${pickedUp} items.`, true)
 }
 
 async function eat() {
@@ -679,10 +687,10 @@ bot.on('chat', async (username, message) => {
     let botResponse = ''
     let actionResult = ''
     try {
-      const availableRecipes = await bot.recipesAll(null, null, null)
-      const reciepiesToCraft = availableRecipes
-        .map(r => r.result.name)
-        .join(', ')
+      // const availableRecipes = await bot.recipesAll(null, null, null)
+      // const reciepiesToCraft = availableRecipes
+      //   .map(r => r.result.name)
+      //   .join(', ')
 
       // console.log("Rzeczy do skraftowania: ", reciepiesToCraft);
 
@@ -698,42 +706,24 @@ bot.on('chat', async (username, message) => {
         )
         .join('; ')
 
-      console.log('Inventory: ', inventory)
-      console.log('History: ', history)
-      console.log('HistoryText: ', historyText)
+      const requestContent =
+        fileContent + `\nEkwipunek ${inventory}\nHistoria: ${historyText}`
 
-      const fileContent = fs.readFileSync('./content.txt', 'utf-8')
+      if (Date.now() - apiTimer < 2000) await sleep(2000)
+      apiTimer = Date.now()
 
-      const response = await axios.post(
-        GROQ_API_ENDPOINT,
-        {
-          messages: [
-            {
-              role: 'system',
-              content: fileContent,
-            },
-            {
-              role: 'user',
-              content: objective === 'brak' ? message : '',
-            },
-          ],
-          model: 'llama-3.1-70b-versatile',
-          temperature: 0,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${GROQ_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-        }
+      const botResponse = await sendRequest(
+        objective === 'brak' ? message : '',
+        requestContent
       )
 
-      botResponse = response.data.choices[0]?.message?.content || ''
       console.log(`[Bot]: ${botResponse}`)
       bot.chat(botResponse)
 
       if (botResponse.startsWith('!')) {
         const [command, ...args] = botResponse.slice(1).split(' ')
+
+        actionResult = 'Nie udało się zrealizować akcji.'
 
         switch (command) {
           case 'idź':
@@ -749,7 +739,7 @@ bot.on('chat', async (username, message) => {
             if (args.length >= 2) {
               const count = parseInt(args[0])
               const blockType = args.slice(1).join('_')
-              await collectBlock(blockType, count)
+              actionResult = await collectBlock(blockType, count)
             } else {
               bot.chat(
                 'Niepoprawna komenda zbierania. Użyj: !zbierz [liczba] [typ_bloku]'
@@ -874,12 +864,6 @@ bot.on('chat', async (username, message) => {
 
 bot.on('error', err => {
   console.error('Błąd:', err)
-})
-
-bot.on('entityHurt', entity => {
-  if (entity === bot.entity) {
-    defendSelf(bot)
-  }
 })
 
 console.log(
