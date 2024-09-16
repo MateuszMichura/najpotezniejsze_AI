@@ -1,8 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import mineflayer from 'mineflayer'
-
 import { pathfinder, Movements, goals } from 'mineflayer-pathfinder'
 const { GoalNear } = goals
 
@@ -23,17 +21,7 @@ import {
   collectBlock,
   log,
 } from './bot/utils/actions'
-
-import config from '../config.json'
-
-const { BOT_USERNAME, BOT_HOST, BOT_PORT } = config
-
-const bot = mineflayer.createBot({
-  username: BOT_USERNAME,
-  host: BOT_HOST,
-  port: BOT_PORT,
-  version: '1.20.4',
-})
+import { bot } from './bot/core/botConfig'
 
 interface HistoryItem {
   user: string
