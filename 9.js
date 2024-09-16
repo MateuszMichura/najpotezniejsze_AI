@@ -7,7 +7,7 @@ const BOT_USERNAME = "Lama";
 const BOT_HOST = "localhost";
 const BOT_PORT = 3000;
 const GROQ_API_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_API_KEY = "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";
+const GROQ_API_KEY = "";
 const RANGE_GOAL = 1;
 
 const bot = mineflayer.createBot({
