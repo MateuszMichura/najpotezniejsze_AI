@@ -61,15 +61,20 @@ export const collectBlock = async (bot: Bot, blockType: string, num = 1) => {
           }
         } else await bot.unequip('hand')
 
-        //@TODO: Fix this
-        // while (!bot.canSeeBlock(block)) {
-        //   //If the block is not visible, we need to dig blocks between the bot and the target block
-        //   await bot.lookAt(block.position, true)
-        //   const blockToDestroy = bot.blockAtCursor(4)
+        let i = 0
+        while (!bot.canSeeBlock(block)) {
+          //If the block is not visible, we need to dig blocks between the bot and the target block
+          const target = block.position.offset(0.5, 0.5, 0.5)
 
-        //   if (blockToDestroy && bot.canDigBlock(blockToDestroy))
-        //     await bot.dig(blockToDestroy)
-        // }
+          await bot.lookAt(target)
+          const blockToDestroy = bot.blockAtCursor()
+
+          if (blockToDestroy && bot.canDigBlock(blockToDestroy))
+            await bot.dig(blockToDestroy)
+
+          if (i >= 10) break //failsafe
+          i++
+        }
 
         await bot.dig(block)
         await bot.pathfinder.goto(
