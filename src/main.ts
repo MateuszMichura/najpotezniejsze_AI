@@ -23,6 +23,7 @@ import {
   moveAway,
 } from './bot/utils/actions'
 import { bot } from './bot/core/botConfig'
+import { sleep } from './bot/utils/sleep'
 
 interface HistoryItem {
   user: string
@@ -36,10 +37,6 @@ const fileContent = fs.readFileSync('./src/bot/utils/content.txt', 'utf-8') // T
 const history: HistoryItem[] = [] // Historia komunikacji z botem
 let apiTimer = Date.now() // Timer do ograniczenia zapytań do API
 let objective = 'brak' // globalna zmienna dla !ustaw_cel, musi byc globalna
-
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
 
 bot.once('spawn', () => {
   console.log('Bot pojawił się w grze')
@@ -170,13 +167,12 @@ async function fire() {
   console.log('fire...')
   await bot.equip(flintAndSteel, 'hand')
 
-  const block = bot.blockAt(bot.entity.position.offset(2, 1, 2))
+  const block = bot.blockAt(bot.entity.position.offset(1, -1, 1))
 
   if (block) {
-    // Zmiana na `bot.activateItem()` zamiast `bot.useOn(block)`
-    await bot.activateItem()
-    await sleep(100)
-    bot.deactivateItem()
+    await bot.activateBlock(block, new Vec3(0, 1, 0))
+
+    return log(bot, `Zapaliłem ogień.`, true)
   } else {
     console.error('Blok nie został znaleziony.')
   }
@@ -184,23 +180,30 @@ async function fire() {
 
 async function createNetherPortal(): Promise<string> {
   const obsidian = bot.inventory.items().find(item => item.name === 'obsidian')
+  const scaffolding = bot.inventory.items().find(item => item.name === 'dirt')
   const flintAndSteel = bot.inventory
     .items()
     .find(item => item.name === 'flint_and_steel')
 
-  if (!obsidian || obsidian.count < 10) {
-    const message =
-      'Nie mam wystarczająco dużo obsydianu, aby stworzyć portal Nether.'
-    bot.chat(message)
-    return message
-  }
-  if (!flintAndSteel) {
-    const message = 'Nie mam krzesiwa i żelaza, aby stworzyć portal Nether.'
-    bot.chat(message)
-    return message
-  }
+  if (!obsidian || obsidian.count < 10)
+    return log(
+      bot,
+      `Nie mam wystarczającej ilości obsydianu, aby stworzyć portal Nether.`,
+      true
+    )
 
-  await bot.equip(obsidian, 'hand')
+  if (!flintAndSteel)
+    return log(
+      bot,
+      `Nie mam krzesiwa i żelaza, aby stworzyć portal Nether.`,
+      true
+    )
+  if (!scaffolding)
+    return log(
+      bot,
+      `Nie mam wystarczającej ilości bloków, aby stworzyć portal Nether.`,
+      true
+    )
 
   const portalBlocks = [
     { x: 2, y: 0, z: 0 },
@@ -219,37 +222,51 @@ async function createNetherPortal(): Promise<string> {
     { x: 2, y: 4, z: 3 },
   ]
 
-  for (const blockPos of portalBlocks) {
-    try {
-      const pos = bot.entity.position.offset(blockPos.x, blockPos.y, blockPos.z)
-      await bot.lookAt(pos)
+  for (let i = 0; i < portalBlocks.length; i++) {
+    {
+      try {
+        const blockPos = portalBlocks[i]
+        const blockToPlace =
+          [0, 3, 10, 13].findIndex(num => num === i) !== -1
+            ? scaffolding
+            : obsidian
 
-      const block = bot.blockAt(pos)
-      if (block) {
-        await bot.placeBlock(block, new Vec3(0, 1, 0))
-      } else {
-        console.error('Blok nie został znaleziony w pozycji:', pos)
+        await bot.equip(blockToPlace, 'hand')
+        const pos = bot.entity.position.offset(
+          blockPos.x,
+          blockPos.y,
+          blockPos.z
+        )
+        await bot.lookAt(pos)
+
+        const block = bot.blockAt(pos)
+        if (block) {
+          bot.placeBlock(block, new Vec3(0, 1, 0)).catch(_ => {})
+          await sleep(500)
+        } else {
+          console.error('Blok nie został znaleziony w pozycji:', pos)
+        }
+      } catch (error) {
+        console.error('Błąd podczas stawiania bloku:', error)
       }
-    } catch (error) {
-      console.error('Błąd podczas stawiania bloku:', error)
     }
   }
 
-  await bot.lookAt(
+  const blockToIgnite = bot.blockAt(
     bot.entity.position.offset(
       portalBlocks[1].x,
       portalBlocks[1].y,
       portalBlocks[1].z
     )
   )
-  await bot.equip(flintAndSteel, 'hand')
-  bot.activateItem()
-  await sleep(100)
-  bot.deactivateItem()
 
-  const successMessage = 'Stworzyłem portal Nether.'
-  bot.chat(successMessage)
-  return successMessage
+  if (!blockToIgnite)
+    return log(bot, `Nie mogę znaleźć bloku do zapalenia.`, true)
+
+  await bot.equip(flintAndSteel, 'hand')
+  await bot.activateBlock(blockToIgnite)
+
+  return log(bot, `Stworzyłem portal Nether.`, true)
 }
 
 bot.on('chat', async (username, message) => {
