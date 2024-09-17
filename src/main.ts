@@ -20,9 +20,9 @@ import {
   smeltItem,
   collectBlock,
   log,
+  moveAway,
 } from './bot/utils/actions'
 import { bot } from './bot/core/botConfig'
-import { moveAway } from './bot/actions/moveAway'
 
 interface HistoryItem {
   user: string
