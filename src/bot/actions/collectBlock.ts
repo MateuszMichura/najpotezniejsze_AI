@@ -65,7 +65,7 @@ export const collectBlock = async (bot: Bot, blockType: string, num = 1) => {
         // while (!bot.canSeeBlock(block)) {
         //   //If the block is not visible, we need to dig blocks between the bot and the target block
         //   await bot.lookAt(block.position, true)
-        //   const blockToDestroy = bot.blockAtCursor(8)
+        //   const blockToDestroy = bot.blockAtCursor(4)
 
         //   if (blockToDestroy && bot.canDigBlock(blockToDestroy))
         //     await bot.dig(blockToDestroy)

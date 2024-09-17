@@ -4,7 +4,8 @@ import { goals } from 'mineflayer-pathfinder'
 // import { collectBlock } from './collectBlock'
 import { type Bot } from 'mineflayer'
 import { type Block } from 'prismarine-block'
-const Item = require('prismarine-item')('1.20.4')
+import { bot as botConfig } from '../core/botConfig'
+const Item = require('prismarine-item')(botConfig.version)
 
 const { GoalNear } = goals
 

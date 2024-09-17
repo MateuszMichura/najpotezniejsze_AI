@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-dotenv.config({ path: `.env.local` })
+dotenv.config({ path: `.env.local` }) //@TODO: zmienic zeby obslugiwalo .env.local i .env
 
 import { pathfinder, Movements, goals } from 'mineflayer-pathfinder'
 const { GoalNear } = goals
