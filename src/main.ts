@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-dotenv.config()
+dotenv.config({ path: `.env.local` })
 
 import { pathfinder, Movements, goals } from 'mineflayer-pathfinder'
 const { GoalNear } = goals
@@ -22,6 +22,7 @@ import {
   log,
 } from './bot/utils/actions'
 import { bot } from './bot/core/botConfig'
+import { moveAway } from './bot/actions/moveAway'
 
 interface HistoryItem {
   user: string
@@ -34,6 +35,7 @@ bot.loadPlugin(pathfinder)
 const fileContent = fs.readFileSync('./src/bot/utils/content.txt', 'utf-8') // Treść pliku content.txt
 const history: HistoryItem[] = [] // Historia komunikacji z botem
 let apiTimer = Date.now() // Timer do ograniczenia zapytań do API
+let objective = 'brak' // globalna zmienna dla !ustaw_cel, musi byc globalna
 
 async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
@@ -180,37 +182,6 @@ async function fire() {
   }
 }
 
-async function moveAway(distance = 5): Promise<string> {
-  const currentPos = bot.entity.position
-  const directions = [
-    new Vec3(1, 0, 0),
-    new Vec3(-1, 0, 0),
-    new Vec3(0, 0, 1),
-    new Vec3(0, 0, -1),
-  ]
-
-  let i = 0
-
-  for (const direction of directions) {
-    const newPos = currentPos.plus(direction.scaled(distance))
-    if (i > 4)
-      return 'Nie udało się znaleźć miejsca do oddalenia, po 4 razach przestaje szukać'
-
-    try {
-      await bot.pathfinder.goto(new GoalNear(newPos.x, newPos.y, newPos.z, 1))
-      i++
-      const message = `Oddaliłem się o ${distance} bloków.`
-      bot.chat(message)
-      return message
-    } catch (error) {
-      console.log('Nie mogę się ruszyć w tym kierunku, próbuję innego.')
-    }
-  }
-
-  const errorMessage = 'Nie mogę się oddalić w żadnym kierunku.'
-  bot.chat(errorMessage)
-  return errorMessage
-}
 async function createNetherPortal(): Promise<string> {
   const obsidian = bot.inventory.items().find(item => item.name === 'obsidian')
   const flintAndSteel = bot.inventory
@@ -283,22 +254,16 @@ async function createNetherPortal(): Promise<string> {
 
 bot.on('chat', async (username, message) => {
   if (username === bot.username) return
+  if (message[0] !== '!') return
+
+  message = message.slice(1)
 
   console.log(`[${username}]: ${message}`)
-
-  let objective = 'brak'
 
   do {
     let botResponse = ''
     let actionResult: any = ''
     try {
-      // const availableRecipes = await bot.recipesAll(null, null, null)
-      // const reciepiesToCraft = availableRecipes
-      //   .map(r => r.result.name)
-      //   .join(', ')
-
-      // console.log("Rzeczy do skraftowania: ", reciepiesToCraft);
-
       const inventory = bot.inventory
         .items()
         .map(item => item.name + '*' + item.count)
@@ -311,8 +276,11 @@ bot.on('chat', async (username, message) => {
         )
         .join('; ')
 
+      console.log('Ekwipunek:', inventory)
+      console.log('Historia:', historyText)
+
       const systemContent =
-        fileContent + `\nEkwipunek ${inventory}\nHistoria: ${historyText}`
+        fileContent + `\nEkwipunek: ${inventory}\nHistoria: ${historyText}`
 
       if (Date.now() - apiTimer < 2000) await sleep(2000)
       apiTimer = Date.now()
@@ -458,7 +426,11 @@ bot.on('chat', async (username, message) => {
             break
           case 'oddal':
             // Implementacja oddalania się
-            actionResult = await moveAway(10)
+            const distance = parseInt(args[0])
+            if (Number.isNaN(distance))
+              actionResult = 'Niepoprawna wartość odległości'
+            else actionResult = await moveAway(bot, distance)
+
             break
           case 'stwórz_portal_nether':
             actionResult = await createNetherPortal()
@@ -468,9 +440,11 @@ bot.on('chat', async (username, message) => {
             break
           case 'ustaw_cel':
             objective = botResponse.split('cel')[1]
+            actionResult = 'Ustawiono cel - ' + objective
             break
           case 'usuń_cel':
             objective = 'brak'
+            actionResult = 'Usunięto cel - ' + objective
             break
           default:
             bot.chat('Nie rozumiem tej komendy.')
@@ -484,6 +458,8 @@ bot.on('chat', async (username, message) => {
         error.response ? error.response.data : error.message
       )
       bot.chat('Przepraszam, mam problemy ze zrozumieniem w tej chwili.')
+
+      actionResult = error.response ? error.response.data : error.message
     }
 
     history.push({
@@ -494,6 +470,14 @@ bot.on('chat', async (username, message) => {
 
     if (history.length > 100) history.shift()
   } while (objective !== 'brak')
+})
+
+bot.on('kicked', reason => {
+  console.error('Zostałem wyrzucony z gry:', reason)
+})
+
+bot.on('end', message => {
+  console.error('Bot został wyłączony. Wiadomość: ', message)
 })
 
 bot.on('error', err => {

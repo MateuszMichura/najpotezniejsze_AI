@@ -74,7 +74,7 @@ export const smeltItem = async (bot, itemName, num = 1) => {
     console.log(input_item)
 
     if (input_item && input_item.name !== itemName && input_item.count > 0) {
-      if (placedFurnace) await collectBlock('furnace', 1)
+      if (placedFurnace) await collectBlock(bot, 'furnace', 1)
       return log(
         bot,
         `The furnace is currently smelting ${input_item.name}.`,
@@ -86,7 +86,7 @@ export const smeltItem = async (bot, itemName, num = 1) => {
       return acc
     }, {})
     if (!inv_counts[itemName] || inv_counts[itemName] < num) {
-      if (placedFurnace) await collectBlock('furnace', 1)
+      if (placedFurnace) await collectBlock(bot, 'furnace', 1)
       return log(bot, `You do not have enough ${itemName} to smelt.`, true)
     }
 
@@ -96,7 +96,7 @@ export const smeltItem = async (bot, itemName, num = 1) => {
         .find(item => item.name === 'coal' || item.name === 'charcoal')
       let put_fuel = Math.ceil(num / 8)
       if (!fuel || fuel.count < put_fuel) {
-        if (placedFurnace) await collectBlock('furnace', 1)
+        if (placedFurnace) await collectBlock(bot, 'furnace', 1)
         return log(
           bot,
           `You do not have enough coal or charcoal to smelt ${num} ${itemName}, you need ${put_fuel} coal or charcoal`,
@@ -132,7 +132,7 @@ export const smeltItem = async (bot, itemName, num = 1) => {
     }
 
     if (placedFurnace) {
-      await collectBlock('furnace', 1)
+      await collectBlock(bot, 'furnace', 1)
     }
     if (total === 0) {
       return log(bot, `Failed to smelt ${itemName}.`, true)
