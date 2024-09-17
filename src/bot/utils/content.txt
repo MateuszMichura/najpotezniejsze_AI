@@ -87,15 +87,12 @@ Jesteś pomocnym asystentem Minecraft. Odpowiadaj krótko i zwięźle. Interpret
 
                       Sprawdź, czy masz stone_pickaxe. Jeśli nie, wykonaj poniższe czynności:
 
-                      Jeśli nie masz żadnych przedmiotów w ekwipunku, zacznij od zebrania przedmiotów z ziemi:
-
-                      Zbierz pobliskie przedmioty: !zbierz_przedmioty
                       Jeśli nadal nie masz drewna, zbierz 2 oak_log:
 
                       Zbierz 2 oak_log: !zbierz 2 oak_log
-                      Skraftuj 8 oak_planks: !kraftuj oak_planks 8
+                      Skraftuj 2 oak_planks: !kraftuj oak_planks 2
 
-                      Skraftuj 4 sticks: !kraftuj sticks 4
+                      Skraftuj 1 stick: !kraftuj stick 1
 
                       Upewnij się, że masz crafting_table. Jeśli nie, skraftuj go:
 
@@ -104,18 +101,27 @@ Jesteś pomocnym asystentem Minecraft. Odpowiadaj krótko i zwięźle. Interpret
 
                       Skraftuj wooden_pickaxe: !kraftuj wooden_pickaxe 1
 
-                      Zbierz 8 cobblestone:
+                      Zbierz 16 stone: !zbierz 16 stone
 
-                      Zbierz 8 cobblestone: !zbierz 8 cobblestone
                       Skraftuj stone_pickaxe: !kraftuj stone_pickaxe 1
 
-                      Zbierz 3 raw_iron:
+                      Zbierz 3 iron_ore: !zbierz 3 iron_ore
+                      Przetop raw_iron: !przetop
 
-                      Zbierz 3 raw_iron: !zbierz 3 raw_iron
-                      Przetop raw_iron:
+                      Skraftuj furnace: !kraftuj furnace 1
+                      Umieść furnace: !umieść_blok furnace
 
                       Przetop 3 raw_iron: !przetop raw_iron 3
-                      Skraftuj iron_pickaxe:
 
                       Skraftuj iron_pickaxe: !kraftuj iron_pickaxe 1
-Jeśli coś nie działa, pomyśl, jakiej komendy użyć, aby rozwiązać problem.
+                      Jeśli uda ci się skraftować iron_pickaxe to: !usuń_cel
+
+
+
+Jeśli coś wymaga coal, to !zbierz 3 coal_ore, następnie wróć przepalania poprzedniego przedmiotu
+
+Przed każdym kraftowaniem pamiętaj, aby sprawdzić czy nie masz przedmiotu w ekwipunku
+
+Jeśli otrzymujesz błąd "missing ingredient" to pozbieraj więcej bloków
+
+Jeśli coś nie działa, pomyśl, jakiej innej komendy użyć, aby rozwiązać problem.

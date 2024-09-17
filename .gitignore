@@ -1,4 +1,5 @@
 node_modules
+.env.local
 
 mc-server/logs
 mc-server/libraries

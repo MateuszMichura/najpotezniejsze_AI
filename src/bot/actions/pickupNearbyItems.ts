@@ -1,9 +1,19 @@
 const { log } = require('../utils/log')
+import { type Bot } from 'mineflayer'
 import { goals, Movements } from 'mineflayer-pathfinder'
 const { GoalNear } = goals
 
-export const pickupNearbyItems = async bot => {
-  const distance = 8
+/**
+ * Pickup all items within 8 blocks of the bot.
+ * @param {Bot} bot - Reference to the bot.
+ * @param {number} distance - The distance to search for items.
+ * @param {boolean} verbose - Whether to log the action.
+ */
+export const pickupNearbyItems = async (
+  bot: Bot,
+  distance: number = 10,
+  verbose: boolean = true
+) => {
   const getNearestItem = bot =>
     bot.nearestEntity(
       entity =>
@@ -31,5 +41,5 @@ export const pickupNearbyItems = async bot => {
     pickedUp++
   }
 
-  return log(bot, `Picked up ${pickedUp} items.`, true)
+  return log(bot, `Picked up ${pickedUp} items.`, verbose)
 }
