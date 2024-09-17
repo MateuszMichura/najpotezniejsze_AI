@@ -23,12 +23,7 @@ import {
   moveAway,
 } from './bot/utils/actions'
 import { bot } from './bot/core/botConfig'
-
-interface HistoryItem {
-  user: string
-  bot: string
-  result: string
-}
+import { HistoryItem } from 'bot/utils/types'
 
 bot.loadPlugin(pathfinder)
 
