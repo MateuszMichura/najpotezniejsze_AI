@@ -3,8 +3,17 @@ import { Vec3 } from 'vec3'
 import { log, sleep } from '../utils/actions'
 
 export const createNetherPortal = async (): Promise<string> => {
+  const scaffoldingItems = [
+    'dirt',
+    'oak_planks',
+    'cobblestone',
+    'netherrack',
+  ] as const
+
   const obsidian = bot.inventory.items().find(item => item.name === 'obsidian')
-  const scaffolding = bot.inventory.items().find(item => item.name === 'dirt')
+  const scaffolding = bot.inventory
+    .items()
+    .find(item => scaffoldingItems.includes(item.name as any))
   const flintAndSteel = bot.inventory
     .items()
     .find(item => item.name === 'flint_and_steel')
@@ -50,10 +59,7 @@ export const createNetherPortal = async (): Promise<string> => {
     {
       try {
         const blockPos = portalBlocks[i]
-        const blockToPlace =
-          [0, 3, 10, 13].findIndex(num => num === i) !== -1
-            ? scaffolding
-            : obsidian
+        const blockToPlace = [0, 3, 10, 13].includes(i) ? scaffolding : obsidian
 
         await bot.equip(blockToPlace, 'hand')
         const pos = bot.entity.position.offset(
@@ -65,7 +71,7 @@ export const createNetherPortal = async (): Promise<string> => {
 
         const block = bot.blockAt(pos)
         if (block) {
-          bot.placeBlock(block, new Vec3(0, 1, 0)).catch(_ => {})
+          bot.placeBlock(block, new Vec3(0, 1, 0)).catch(_ => {}) //jakby się crashowało, to zwiększ czas lub zmień na await - blad mineflayer
           await sleep(500)
         } else {
           console.error('Blok nie został znaleziony w pozycji:', pos)
