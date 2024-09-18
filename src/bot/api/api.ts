@@ -13,7 +13,7 @@ console.log('AI_PROVIDER: ', AI_PROVIDER)
 export const sendRequest = async (
   userMessage: string,
   systemMessage: string
-): Promise<string | false> => {
+): Promise<string> => {
   const endpoint =
     AI_PROVIDER === 'openai' ? OPENAI_API_ENDPOINT : GROQ_API_ENDPOINT
   const apiKey = AI_PROVIDER === 'openai' ? OPENAI_API_KEY : GROQ_API_KEY
@@ -22,7 +22,7 @@ export const sendRequest = async (
 
   if (!endpoint || !apiKey) {
     console.error('Endpoint or API key is missing')
-    return false
+    return 'Endpoint or API key is missing'
   }
 
   try {
@@ -53,6 +53,6 @@ export const sendRequest = async (
     return response.data.choices[0]?.message?.content || ''
   } catch (err) {
     console.log('Api error: ', err)
-    return false
+    return 'Api error'
   }
 }
