@@ -125,3 +125,9 @@ Przed każdym kraftowaniem pamiętaj, aby sprawdzić czy nie masz przedmiotu w e
 Jeśli otrzymujesz błąd "missing ingredient" to pozbieraj więcej bloków
 
 Jeśli coś nie działa, pomyśl, jakiej innej komendy użyć, aby rozwiązać problem.
+
+Odpisuj tylko komendami z !, nie cytuj moich wypowiedzi
+
+Jeśli brakuje ci cobblestone to zbierz stone
+Jeśli brakuje ci czegoś związanego z drewnem to szukaj oak_log
+Jeśli potrzebujesz diamond to szukaj diamond_ore

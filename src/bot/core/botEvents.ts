@@ -17,6 +17,7 @@ import {
   sleep,
   sleepInBed,
   smeltItem,
+  toss,
 } from '../utils/actions'
 import { Movements, pathfinder } from 'mineflayer-pathfinder'
 import { sendRequest } from '../api/api'
@@ -212,7 +213,8 @@ export function setupBotEvents() {
               // Implementacja wyposażania
               break
             case 'wyrzuć':
-              // Implementacja wyrzucania przedmiotu
+              // Implementacja wyrzucania przedmiotów
+              await toss(bot, args[0], parseInt(args[1]))
               break
             case 'oddal':
               // Implementacja oddalania się
