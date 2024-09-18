@@ -9,6 +9,7 @@ import {
   eat,
   findNearestPlayer,
   fire,
+  getRecipe,
   moveAway,
   moveToPlayer,
   pickupNearbyItems,
@@ -237,6 +238,10 @@ export function setupBotEvents() {
             case 'usuń_cel':
               objective = 'brak'
               actionResult = 'Usunięto cel - ' + objective
+              break
+            case 'przepis':
+              // Implementacja wyświetlania przepisu
+              await getRecipe(bot, args[0])
               break
             default:
               bot.chat('Nie rozumiem tej komendy.')
