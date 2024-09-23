@@ -18,7 +18,7 @@ export const getRecipe = async (
   const extractRecipe = () =>
     recipes[0].delta
       .filter(item => new Item(item.id).name !== itemName)
-      .map(item => `${new Item(item.id).name}*${item.count}`)
+      .map(item => `${new Item(item.id).name}*${Math.abs(item.count)}`)
       .join(', ')
       .replace(/,([^,]*)$/, '.')
 

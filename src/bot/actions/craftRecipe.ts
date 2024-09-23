@@ -172,7 +172,7 @@ export const craftRecipe = async (bot: Bot, itemName: string, num = 1) => {
   let recipes = bot.recipesFor(
     bot.registry.itemsByName[itemName].id,
     null,
-    1,
+    num,
     null
   )
 
@@ -182,7 +182,7 @@ export const craftRecipe = async (bot: Bot, itemName: string, num = 1) => {
     recipes = bot.recipesFor(
       bot.registry.itemsByName[itemName].id,
       null,
-      1,
+      num,
       true
     )
     if (!recipes || recipes.length === 0) {
@@ -229,6 +229,8 @@ export const craftRecipe = async (bot: Bot, itemName: string, num = 1) => {
       )
     )
   }
+
+  num = Math.floor(num / recipes[0].result.count)
 
   await bot.craft(recipes[0], num, craftingTable)
 

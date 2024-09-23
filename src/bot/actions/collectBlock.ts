@@ -82,7 +82,7 @@ export const collectBlock = async (bot: Bot, blockType: string, num = 1) => {
         )
 
         collected++
-      } else return log(bot, `Nie mogę zebrać ${blockType}.`, true)
+      } else continue //@TODO: dodac szukanie bloku w okolicy
 
       if (prevBlockPos) {
         if (blockPos.distanceTo(prevBlockPos) >= 4) {

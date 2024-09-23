@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { sleep } from '../utils/sleep'
 
 const AI_PROVIDER: 'openai' | 'groq' = process.env.AI_PROVIDER as
   | 'openai'
@@ -25,34 +26,46 @@ export const sendRequest = async (
     return 'Endpoint or API key is missing'
   }
 
-  try {
-    const response = await axios.post(
-      endpoint,
-      {
-        messages: [
-          {
-            role: 'system',
-            content: systemMessage,
-          },
-          {
-            role: 'user',
-            content: userMessage,
-          },
-        ],
-        model: model,
-        temperature: 0,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
+  let tries = 1
+  while (tries <= 4) {
+    try {
+      const response = await axios.post(
+        endpoint,
+        {
+          messages: [
+            {
+              role: 'system',
+              content: systemMessage,
+            },
+            {
+              role: 'user',
+              content: userMessage,
+            },
+          ],
+          model: model,
+          temperature: 0,
         },
-      }
-    )
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
 
-    return response.data.choices[0]?.message?.content || ''
-  } catch (err) {
-    console.log('Api error: ', err)
-    return 'Api error'
+      return response.data.choices[0]?.message?.content || ''
+    } catch (err: AxiosError | any) {
+      console.log('Api error: ', err?.response || err)
+      if (err?.status === 429) {
+        // Too many requests
+        await sleep(10000)
+        tries++
+        continue
+      }
+
+      return 'Api error'
+    }
   }
+
+  return 'Api error'
 }
