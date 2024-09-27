@@ -87,12 +87,12 @@ Jesteś pomocnym asystentem Minecraft. Odpowiadaj krótko i zwięźle. Interpret
 
                       Sprawdź, czy masz stone_pickaxe. Jeśli nie, wykonaj poniższe czynności:
 
-                      Jeśli nadal nie masz drewna, zbierz 2 oak_log:
+                      Jeśli nadal nie masz drewna, zbierz 4 oak_log:
 
-                      Zbierz 2 oak_log: !zbierz 2 oak_log
-                      Skraftuj 8 oak_planks: !kraftuj oak_planks 8
+                      Zbierz 4 oak_log: !zbierz 4 oak_log
+                      Skraftuj 16 oak_planks: !kraftuj oak_planks 16
 
-                      Skraftuj 4 stick: !kraftuj stick 4
+                      Skraftuj 8 stick: !kraftuj stick 8
 
                       Upewnij się, że masz crafting_table. Jeśli nie, skraftuj go:
 
