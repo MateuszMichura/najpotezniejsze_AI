@@ -11,7 +11,7 @@ export const collectBlock = async (bot: Bot, blockType: string, num = 1) => {
     const blocks = bot.findBlocks({
       matching: block => block.name === blockType,
       maxDistance: 100,
-      count: num,
+      count: num + 10, // We want to collect more than we need to account for blocks that are unreachable
     })
 
     let triesToFindBlock = 0
@@ -82,7 +82,7 @@ export const collectBlock = async (bot: Bot, blockType: string, num = 1) => {
         )
 
         collected++
-      } else continue //@TODO: dodac szukanie bloku w okolicy
+      } else continue
 
       if (prevBlockPos) {
         if (blockPos.distanceTo(prevBlockPos) >= 4) {

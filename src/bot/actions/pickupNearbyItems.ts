@@ -29,7 +29,6 @@ export const pickupNearbyItems = async (
       entities.push(entity)
     }
   }
-  console.log('Entities: ', entities)
 
   while (nearestItem) {
     bot.pathfinder.setMovements(new Movements(bot))
