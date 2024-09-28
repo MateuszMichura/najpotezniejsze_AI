@@ -1,6 +1,9 @@
 import { bot } from '../core/botConfig'
 import { Vec3 } from 'vec3'
 import { log, sleep } from '../utils/actions'
+import { goals } from 'mineflayer-pathfinder'
+
+const { GoalNear } = goals
 
 export const createNetherPortal = async (): Promise<string> => {
   const scaffoldingItems = [
@@ -52,14 +55,13 @@ export const createNetherPortal = async (): Promise<string> => {
     { x: 2, y: 4, z: 0 },
     { x: 2, y: 4, z: 1 },
     { x: 2, y: 4, z: 2 },
-    { x: 2, y: 4, z: 3 },
   ]
 
   for (let i = 0; i < portalBlocks.length; i++) {
     {
       try {
         const blockPos = portalBlocks[i]
-        const blockToPlace = [0, 3, 10, 13].includes(i) ? scaffolding : obsidian
+        const blockToPlace = [0, 3, 10].includes(i) ? scaffolding : obsidian
 
         await bot.equip(blockToPlace, 'hand')
         const pos = bot.entity.position.offset(
@@ -95,6 +97,14 @@ export const createNetherPortal = async (): Promise<string> => {
 
   await bot.equip(flintAndSteel, 'hand')
   await bot.activateBlock(blockToIgnite)
+  await bot.pathfinder.goto(
+    new GoalNear(
+      blockToIgnite.position.x,
+      blockToIgnite.position.y + 1,
+      blockToIgnite.position.z,
+      1
+    )
+  )
 
   return log(bot, `Stworzyłem portal Nether.`, true)
 }

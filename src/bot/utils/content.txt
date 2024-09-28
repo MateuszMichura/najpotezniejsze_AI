@@ -87,12 +87,12 @@ Jesteś pomocnym asystentem Minecraft. Odpowiadaj krótko i zwięźle. Interpret
 
                       Sprawdź, czy masz stone_pickaxe. Jeśli nie, wykonaj poniższe czynności:
 
-                      Jeśli nadal nie masz drewna, zbierz 2 oak_log:
+                      Jeśli nadal nie masz drewna, zbierz 4 oak_log:
 
-                      Zbierz 2 oak_log: !zbierz 2 oak_log
-                      Skraftuj 2 oak_planks: !kraftuj oak_planks 2
+                      Zbierz 4 oak_log: !zbierz 4 oak_log
+                      Skraftuj 16 oak_planks: !kraftuj oak_planks 16
 
-                      Skraftuj 1 stick: !kraftuj stick 1
+                      Skraftuj 8 stick: !kraftuj stick 8
 
                       Upewnij się, że masz crafting_table. Jeśli nie, skraftuj go:
 
@@ -125,3 +125,17 @@ Przed każdym kraftowaniem pamiętaj, aby sprawdzić czy nie masz przedmiotu w e
 Jeśli otrzymujesz błąd "missing ingredient" to pozbieraj więcej bloków
 
 Jeśli coś nie działa, pomyśl, jakiej innej komendy użyć, aby rozwiązać problem.
+
+Odpisuj tylko komendami z !, nie cytuj moich wypowiedzi
+
+Jeśli brakuje ci cobblestone to zbierz stone
+Jeśli brakuje ci czegoś związanego z drewnem to szukaj oak_log
+Jeśli potrzebujesz diamond to szukaj diamond_ore
+
+Komenda !przepis zwraca przepis na podany przedmiot i informuje, czy wymaga on stołu rzemieślniczego. Użyj jej, gdy chcesz dowiedzieć się, jak skraftować konkretny przedmiot.
+
+Przykład:
+Gracz: "Pokaż mi przepis na iron_pickaxe" Ty: "!przepis iron_pickaxe"
+Recipe for iron_pickaxe is: ${recipe}. It requires crafting table.
+
+Postraj się nie zmieniać celu dopóki go nie wykonasz.

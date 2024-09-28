@@ -14,14 +14,22 @@ export const pickupNearbyItems = async (
   distance: number = 10,
   verbose: boolean = true
 ) => {
-  const getNearestItem = bot =>
+  const getNearestItem = (bot: Bot) =>
     bot.nearestEntity(
       entity =>
         entity.name === 'item' &&
-        bot.entity.position.distanceTo(entity.position) < distance
+        bot.entity.position.distanceTo(entity.position) <= distance
     )
   let nearestItem = getNearestItem(bot)
   let pickedUp = 0
+
+  let entities: any[] = []
+  for (const [_, entity] of Object.entries(bot.entities)) {
+    if (bot.entity.position.distanceTo(entity.position) <= distance) {
+      entities.push(entity)
+    }
+  }
+
   while (nearestItem) {
     bot.pathfinder.setMovements(new Movements(bot))
     await bot.pathfinder.goto(
