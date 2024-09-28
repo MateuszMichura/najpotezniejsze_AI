@@ -1,4 +1,5 @@
-![Alt Text](https://ibb.co/5Y3xNFK)
+![Miniatura plakatu](./repositofrtdry-open-graph-template.png)
+
 
 # Najpotężniejsze AI w Minecraft – Twój Osobisty Bot z AI
 
