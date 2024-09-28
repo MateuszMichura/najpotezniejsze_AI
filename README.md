@@ -86,24 +86,27 @@ Aby komunikować się z botem w grze, po prostu napisz na czacie Minecrafta kome
 
 Przykładowe Funkcje Bota:
 
-- **! zbierz drewno**: Bot automatycznie zbierze drewno dla Ciebie.
+# Komendy Bota Minecraft
 
-attackNearestMob.ts
-clearNearestFurnace.ts
-collectBlock.ts
-craftRecipe.ts
-createNetherPortal.ts
-defendSelf.ts
-eat.ts
-findNearestPlayer.ts
-fire.ts
-moveAway.ts
-moveToPlayer.ts
-pickupNearbyItems.ts
-placeBlock.ts
-sendWelomeMessage.ts
-sleep.ts
-sleepInBed.ts
-smeltItem.ts
+
+- **! atakuj moba**: Bot zaatakuje najbliższego moba.
+- **! wyczyść piec**: Bot wyczyści zawartość najbliższego pieca.
+- **! zbierz blok**: Bot zbierze określony blok w pobliżu.
+- **! stwórz przedmiot**: Bot stworzy określony przedmiot, jeśli ma dostępne materiały.
+- **! stwórz portal**: Bot zbuduje portal do netheru, jeśli ma odpowiednie materiały.
+- **! broń się**: Bot będzie bronił się przed atakami mobów.
+- **! jedz**: Bot zje jedzenie ze swojego ekwipunku, jeśli jest głodny.
+- **! znajdź gracza**: Bot będzie szukał najbliższego gracza.
+- **! rozpal ogień**: Bot rozpali ogień w określonym miejscu.
+- **! pokaż przepis**: Bot wyświetli przepis na określony przedmiot.
+- **! odejdź**: Bot oddali się od obecnej lokalizacji.
+- **! idź do gracza**: Bot podejdzie do określonego gracza.
+- **! podnieś przedmioty**: Bot podniesie pobliskie przedmioty.
+- **! postaw blok**: Bot postawi blok w określonym miejscu.
+- **! przywitaj się**: Bot wyśle wiadomość powitalną na czacie.
+- **! śpij**: Bot pójdzie spać, jeśli jest noc i znajduje się w pobliżu łóżka.
+- **! śpij w łóżku**: Bot znajdzie najbliższe łóżko i położy się spać.
+- **! przetop przedmiot**: Bot przetopi określony przedmiot w piecu, jeśli ma dostęp do pieca i paliwa.
+- **! wyrzuć przedmiot**: Bot wyrzuci określony przedmiot ze swojego ekwipunku.
 
 Bot zrozumie Twoje polecenie i natychmiast przystąpi do działania!
