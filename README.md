@@ -1,25 +1,27 @@
-# Najpotężniejszy Minecraft Bot z Wykorzystaniem AI
+Oto poprawiona wersja:
 
-Wyobraź sobie bota w Minecraft, który rozumie każde Twoje polecenie, jakbyś rozmawiał z przyjacielem. Bot, który potrafi automatycznie zbierać zasoby, walczyć z wrogami, kraftować przedmioty i reagować na Twoje potrzeby bez konieczności wpisywania skomplikowanych komend. Właśnie tym jest nasz Minecraft Bot z integracją AI! Dzięki potężnym technologiom, takim jak OpenAI i Groq, ten bot jest w stanie zrealizować dosłownie każde zadanie, które mu powierzysz — od najprostszych czynności po najbardziej złożone misje w świecie Minecrafta.
+# Najpotężniejsze AI w Minecraft – Twój Osobisty Bot z AI
+
+Wyobraź sobie bota w Minecraft, który rozumie każde Twoje polecenie, jakbyś rozmawiał z przyjacielem. Bot, który potrafi automatycznie zbierać zasoby, walczyć z wrogami, kraftować przedmioty i reagować na Twoje potrzeby bez konieczności wpisywania skomplikowanych komend. Nasz Minecraft Bot z integracją AI to potężne narzędzie, które spełni każde Twoje zadanie — od prostych czynności po najbardziej skomplikowane misje w świecie Minecrafta.
 
 ## Dlaczego ten bot jest wyjątkowy?
 
-Ten bot to coś więcej niż narzędzie. To Twoje osobiste AI, które:
+Ten bot to coś więcej niż zwykłe narzędzie. To Twoje osobiste AI, które:
 
 - **Rozumie język naturalny**: Nie musisz się męczyć z komendami, wystarczy, że powiesz, co chcesz zrobić.
-- **Automatyzuje każdą czynność**: Czy to walka z potworami, zbieranie zasobów, budowanie struktur czy kraftowanie — bot zrobi to wszystko za Ciebie.
-- **Reaguje inteligentnie**: Dzięki integracji z AI, bot nie tylko rozumie, co mówisz, ale również dostosowuje się do sytuacji w grze, proponując optymalne rozwiązania.
-- **Pracuje dla Ciebie**: Chcesz eksplorować świat, budować epickie konstrukcje czy walczyć z hordą wrogów? Bot zrobi to wszystko za jednym poleceniem!
+- **Automatyzuje każdą czynność**: Od walki z potworami, przez zbieranie zasobów, po budowanie epickich konstrukcji.
+- **Reaguje inteligentnie**: Dzięki AI bot dostosowuje się do sytuacji w grze i proponuje optymalne rozwiązania.
+- **Pracuje dla Ciebie**: Niezależnie, czy chcesz eksplorować, budować czy walczyć, bot zrealizuje to na jedno polecenie.
 
 ## Główne funkcje
 
-- **Walka z mobami**: Zaatakuj najbliższego moba lub skoncentruj się na określonym typie przeciwnika.
-- **Automatyczne zbieranie**: Zbierz zasoby bez klikania — bot zajmie się tym za Ciebie.
+- **Walka z mobami**: Zaatakuj najbliższego moba lub wybierz określony typ przeciwnika.
+- **Automatyczne zbieranie**: Bot zajmie się zbieraniem zasobów za Ciebie.
 - **Kraftowanie**: Zleć botowi stworzenie dowolnych przedmiotów, a on dostarczy Ci gotowe narzędzia, bronie czy materiały budowlane.
-- **Zarządzanie piecem**: Przetapiaj surowce, zarządzaj zasobami i automatyzuj pracę w piecu.
+- **Zarządzanie piecem**: Automatyzuj pracę w piecu, przetapiaj surowce i zarządzaj zasobami.
 - **Pathfinding i eksploracja**: Bot znajdzie drogę do dowolnej lokalizacji lub gracza na serwerze.
-- **Niestandardowe akcje**: Każda komenda, nawet ta najbardziej nietypowa, zostanie zrealizowana.
-- **Inteligentna integracja z AI**: Dzięki technologii OpenAI lub Groq, bot przekształca Twoje słowa w konkretne działania, rozumiejąc sens i kontekst Twoich poleceń.
+- **Niestandardowe akcje**: Bot zrealizuje nawet najbardziej nietypowe komendy.
+- **Inteligentna integracja z AI**: Wykorzystując technologię OpenAI lub Groq, bot rozumie sens i kontekst Twoich poleceń i przekształca je w konkretne działania.
 
 ## Jak zacząć?
 
@@ -48,7 +50,7 @@ Ten bot to coś więcej niż narzędzie. To Twoje osobiste AI, które:
 
 4. **Uzupełnij plik konfiguracyjny `.env`**:
 
-   W głównym katalogu projektu utwórz plik `.env` i wprowadź następujące dane:
+   W głównym katalogu projektu uzupełnij plik `.env` następującymi danymi:
 
    ```env
    GROQ_API_ENDPOINT="https://api.groq.com/openai/v1/chat/completions"
@@ -60,7 +62,10 @@ Ten bot to coś więcej niż narzędzie. To Twoje osobiste AI, które:
    OPENAI_API_KEY=""
    ```
 
-   Uzupełnij `GROQ_API_KEY` i/lub `OPENAI_API_KEY` swoimi kluczami API w zależności od wybranego dostawcy AI.
+   Wprowadź swoje klucze API dla `GROQ_API_KEY` i/lub `OPENAI_API_KEY` w zależności od wybranego dostawcy AI.
+
+   [Zdobądź klucz API Groq tutaj.](https://console.groq.com/keys)  
+   [Zdobądź klucz API OpenAI tutaj.](https://platform.openai.com/usage)
 
 5. **Uruchom bota**:
 
@@ -72,7 +77,17 @@ Ten bot to coś więcej niż narzędzie. To Twoje osobiste AI, które:
 
    Bot jest teraz gotowy do działania w Twoim świecie Minecraft!
 
----
+## Jak używać bota w grze?
 
-Ciesz się nowym poziomem rozgrywki w Minecraft dzięki naszemu inteligentnemu botowi!
+Aby komunikować się z botem w grze, po prostu napisz na czacie Minecrafta komendę w formacie:
+
+```bash
+! <polecenie>
 ```
+
+Na przykład:
+
+- **! zbierz drewno**: Bot automatycznie zbierze drewno dla Ciebie.
+
+Bot zrozumie Twoje polecenie i natychmiast przystąpi do działania!
+
