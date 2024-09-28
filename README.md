@@ -1,4 +1,4 @@
-Oto poprawiona wersja:
+![Alt Text](https://ibb.co/5Y3xNFK)
 
 # Najpotężniejsze AI w Minecraft – Twój Osobisty Bot z AI
 
