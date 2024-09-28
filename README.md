@@ -84,29 +84,35 @@ Aby komunikować się z botem w grze, po prostu napisz na czacie Minecrafta kome
 ! <polecenie>
 ```
 
-Przykładowe Funkcje Bota:
+# Przykładowe Komendy Bota Minecraft
 
-# Komendy Bota Minecraft
+Poniżej znajduje się tabela z przykładowymi komendami dla bota w Minecraft. Wpisz komendę na czacie gry, zaczynając od "!":
 
+**Ważna informacja:** Gdy wyznacza się botowi cel, będzie on kontynuował działania aż do jego osiągnięcia. Na przykład, komenda "! zrób żelazny kilof" spowoduje, że bot będzie wykonywał wszystkie niezbędne kroki (wydobycie żelaza, zebranie drewna, stworzenie pieca, przetopienie rudy, itp.) aż do momentu stworzenia żelaznego kilofa. Bot nie zatrzyma się, dopóki nie osiągnie wyznaczonego celu lub nie napotka przeszkody nie do pokonania.
 
-- **! atakuj moba**: Bot zaatakuje najbliższego moba.
-- **! wyczyść piec**: Bot wyczyści zawartość najbliższego pieca.
-- **! zbierz blok**: Bot zbierze określony blok w pobliżu.
-- **! stwórz przedmiot**: Bot stworzy określony przedmiot, jeśli ma dostępne materiały.
-- **! stwórz portal**: Bot zbuduje portal do netheru, jeśli ma odpowiednie materiały.
-- **! broń się**: Bot będzie bronił się przed atakami mobów.
-- **! jedz**: Bot zje jedzenie ze swojego ekwipunku, jeśli jest głodny.
-- **! znajdź gracza**: Bot będzie szukał najbliższego gracza.
-- **! rozpal ogień**: Bot rozpali ogień w określonym miejscu.
-- **! pokaż przepis**: Bot wyświetli przepis na określony przedmiot.
-- **! odejdź**: Bot oddali się od obecnej lokalizacji.
-- **! idź do gracza**: Bot podejdzie do określonego gracza.
-- **! podnieś przedmioty**: Bot podniesie pobliskie przedmioty.
-- **! postaw blok**: Bot postawi blok w określonym miejscu.
-- **! przywitaj się**: Bot wyśle wiadomość powitalną na czacie.
-- **! śpij**: Bot pójdzie spać, jeśli jest noc i znajduje się w pobliżu łóżka.
-- **! śpij w łóżku**: Bot znajdzie najbliższe łóżko i położy się spać.
-- **! przetop przedmiot**: Bot przetopi określony przedmiot w piecu, jeśli ma dostęp do pieca i paliwa.
-- **! wyrzuć przedmiot**: Bot wyrzuci określony przedmiot ze swojego ekwipunku.
+| Komenda | Opis działania |
+|---------|----------------|
+| ! atakuj moba | Bot zaatakuje najbliższego moba. |
+| ! wyczyść piec | Bot wyczyści zawartość najbliższego pieca. |
+| ! zbierz blok | Bot zbierze określony blok w pobliżu. |
+| ! stwórz przedmiot | Bot stworzy określony przedmiot, wykonując wszystkie niezbędne kroki. |
+| ! stwórz portal | Bot zbuduje portal do netheru, zbierając potrzebne materiały. |
+| ! broń się | Bot będzie bronił się przed atakami mobów. |
+| ! jedz | Bot zje jedzenie ze swojego ekwipunku, jeśli jest głodny. |
+| ! znajdź gracza | Bot będzie szukał najbliższego gracza. |
+| ! rozpal ogień | Bot rozpali ogień w określonym miejscu, zbierając potrzebne materiały. |
+| ! pokaż przepis | Bot wyświetli przepis na określony przedmiot. |
+| ! odejdź | Bot oddali się od obecnej lokalizacji. |
+| ! idź do gracza | Bot podejdzie do określonego gracza. |
+| ! podnieś przedmioty | Bot podniesie pobliskie przedmioty. |
+| ! postaw blok | Bot postawi blok w określonym miejscu. |
+| ! przywitaj się | Bot wyśle wiadomość powitalną na czacie. |
+| ! śpij | Bot pójdzie spać, jeśli jest noc i znajduje się w pobliżu łóżka. |
+| ! śpij w łóżku | Bot znajdzie najbliższe łóżko i położy się spać. |
+| ! przetop przedmiot | Bot przetopi określony przedmiot w piecu, wykonując wszystkie niezbędne kroki. |
+| ! wyrzuć przedmiot | Bot wyrzuci określony przedmiot ze swojego ekwipunku. |
+| ! zrób żelazny kilof | Bot wykona wszystkie niezbędne kroki, aby stworzyć żelazny kilof, włącznie z wydobyciem surowców i stworzeniem potrzebnych narzędzi. |
+
+Pamiętaj, że bot będzie dążył do wykonania zadania, nawet jeśli wymaga to wielu kroków i czasu. To zachowanie pozwala na automatyzację złożonych zadań w grze.
 
 Bot zrozumie Twoje polecenie i natychmiast przystąpi do działania!
