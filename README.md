@@ -25,7 +25,6 @@ Ten bot to coś więcej niż zwykłe narzędzie. To Twoje osobiste AI, które:
 
 ## Jak zacząć?
 
-
 1. **Sklonuj repozytorium**:
 
    ```bash
@@ -50,16 +49,16 @@ Ten bot to coś więcej niż zwykłe narzędzie. To Twoje osobiste AI, które:
 
 4. **Uzupełnij plik konfiguracyjny `.env`**:
 
-   W głównym katalogu projektu uzupełnij plik `.env` następującymi danymi:
+   W głównym katalogu projektu uzupełnij plik `.env` następującymi danymi (GROQ or OPENAI):
 
    ```env
    GROQ_API_ENDPOINT="https://api.groq.com/openai/v1/chat/completions"
-   GROQ_API_KEY=""
+   GROQ_API_KEY="twój klucz api"
 
    AI_PROVIDER="groq" # groq albo openai
 
    OPENAI_API_ENDPOINT="https://api.openai.com/v1/chat/completions"
-   OPENAI_API_KEY=""
+   OPENAI_API_KEY="twój klucz api"
    ```
 
    Wprowadź swoje klucze API dla `GROQ_API_KEY` i/lub `OPENAI_API_KEY` w zależności od wybranego dostawcy AI.
@@ -85,9 +84,26 @@ Aby komunikować się z botem w grze, po prostu napisz na czacie Minecrafta kome
 ! <polecenie>
 ```
 
-Na przykład:
+Przykładowe Funkcje Bota:
 
 - **! zbierz drewno**: Bot automatycznie zbierze drewno dla Ciebie.
 
-Bot zrozumie Twoje polecenie i natychmiast przystąpi do działania!
+attackNearestMob.ts
+clearNearestFurnace.ts
+collectBlock.ts
+craftRecipe.ts
+createNetherPortal.ts
+defendSelf.ts
+eat.ts
+findNearestPlayer.ts
+fire.ts
+moveAway.ts
+moveToPlayer.ts
+pickupNearbyItems.ts
+placeBlock.ts
+sendWelomeMessage.ts
+sleep.ts
+sleepInBed.ts
+smeltItem.ts
 
+Bot zrozumie Twoje polecenie i natychmiast przystąpi do działania!
