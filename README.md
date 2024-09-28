@@ -1,6 +1,5 @@
 ![Alt Text](https://i.ibb.co/GcYgsMR/repositofrtdry-open-graph-template.png)
 
-
 # Najpotężniejsze AI w Minecraft – Twój Osobisty Bot z AI
 
 Wyobraź sobie bota w Minecraft, który rozumie każde Twoje polecenie, jakbyś rozmawiał z przyjacielem. Bot, który potrafi automatycznie zbierać zasoby, walczyć z wrogami, kraftować przedmioty i reagować na Twoje potrzeby bez konieczności wpisywania skomplikowanych komend. Nasz Minecraft Bot z integracją AI to potężne narzędzie, które spełni każde Twoje zadanie — od prostych czynności po najbardziej skomplikowane misje w świecie Minecrafta.
@@ -30,6 +29,10 @@ Ten bot to coś więcej niż zwykłe narzędzie. To Twoje osobiste AI, które:
 
    ```bash
    git clone https://github.com/MateuszMichura/najpotezniejsze_AI.git
+   ```
+
+   ```bash
+   cd najpotezniejsze_AI
    ```
 
 2. **Zainstaluj Yarn globalnie**:
@@ -62,10 +65,7 @@ Ten bot to coś więcej niż zwykłe narzędzie. To Twoje osobiste AI, które:
    OPENAI_API_KEY="twój klucz api"
    ```
 
-   Wprowadź swoje klucze API dla `GROQ_API_KEY` i/lub `OPENAI_API_KEY` w zależności od wybranego dostawcy AI.
-
-   [Zdobądź klucz API Groq tutaj.](https://console.groq.com/keys)  
-   [Zdobądź klucz API OpenAI tutaj.](https://platform.openai.com/usage)
+   Wprowadź swoje klucze API dla [`GROQ_API_KEY`](https://console.groq.com/keys) i/lub [`OPENAI_API_KEY`](https://platform.openai.com/usage) w zależności od wybranego dostawcy AI.
 
 5. **Uruchom bota**:
 
@@ -91,27 +91,27 @@ Poniżej znajduje się tabela z przykładowymi komendami dla bota w Minecraft. W
 
 **Ważna informacja:** Gdy wyznacza się botowi cel, będzie on kontynuował działania aż do jego osiągnięcia. Na przykład, komenda "! zrób żelazny kilof" spowoduje, że bot będzie wykonywał wszystkie niezbędne kroki (wydobycie żelaza, zebranie drewna, stworzenie pieca, przetopienie rudy, itp.) aż do momentu stworzenia żelaznego kilofa. Bot nie zatrzyma się, dopóki nie osiągnie wyznaczonego celu lub nie napotka przeszkody nie do pokonania.
 
-| Komenda | Opis działania |
-|---------|----------------|
-| ! atakuj moba | Bot zaatakuje najbliższego moba. |
-| ! wyczyść piec | Bot wyczyści zawartość najbliższego pieca. |
-| ! zbierz blok | Bot zbierze określony blok w pobliżu. |
-| ! stwórz przedmiot | Bot stworzy określony przedmiot, wykonując wszystkie niezbędne kroki. |
-| ! stwórz portal | Bot zbuduje portal do netheru, zbierając potrzebne materiały. |
-| ! broń się | Bot będzie bronił się przed atakami mobów. |
-| ! jedz | Bot zje jedzenie ze swojego ekwipunku, jeśli jest głodny. |
-| ! znajdź gracza | Bot będzie szukał najbliższego gracza. |
-| ! rozpal ogień | Bot rozpali ogień w określonym miejscu, zbierając potrzebne materiały. |
-| ! pokaż przepis | Bot wyświetli przepis na określony przedmiot. |
-| ! odejdź | Bot oddali się od obecnej lokalizacji. |
-| ! idź do gracza | Bot podejdzie do określonego gracza. |
-| ! podnieś przedmioty | Bot podniesie pobliskie przedmioty. |
-| ! postaw blok | Bot postawi blok w określonym miejscu. |
-| ! przywitaj się | Bot wyśle wiadomość powitalną na czacie. |
-| ! śpij | Bot pójdzie spać, jeśli jest noc i znajduje się w pobliżu łóżka. |
-| ! śpij w łóżku | Bot znajdzie najbliższe łóżko i położy się spać. |
-| ! przetop przedmiot | Bot przetopi określony przedmiot w piecu, wykonując wszystkie niezbędne kroki. |
-| ! wyrzuć przedmiot | Bot wyrzuci określony przedmiot ze swojego ekwipunku. |
+| Komenda              | Opis działania                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| ! atakuj moba        | Bot zaatakuje najbliższego moba.                                                                                                     |
+| ! wyczyść piec       | Bot wyczyści zawartość najbliższego pieca.                                                                                           |
+| ! zbierz blok        | Bot zbierze określony blok w pobliżu.                                                                                                |
+| ! stwórz przedmiot   | Bot stworzy określony przedmiot, wykonując wszystkie niezbędne kroki.                                                                |
+| ! stwórz portal      | Bot zbuduje portal do netheru, zbierając potrzebne materiały.                                                                        |
+| ! broń się           | Bot będzie bronił się przed atakami mobów.                                                                                           |
+| ! jedz               | Bot zje jedzenie ze swojego ekwipunku, jeśli jest głodny.                                                                            |
+| ! znajdź gracza      | Bot będzie szukał najbliższego gracza.                                                                                               |
+| ! rozpal ogień       | Bot rozpali ogień w określonym miejscu, zbierając potrzebne materiały.                                                               |
+| ! pokaż przepis      | Bot wyświetli przepis na określony przedmiot.                                                                                        |
+| ! odejdź             | Bot oddali się od obecnej lokalizacji.                                                                                               |
+| ! idź do gracza      | Bot podejdzie do określonego gracza.                                                                                                 |
+| ! podnieś przedmioty | Bot podniesie pobliskie przedmioty.                                                                                                  |
+| ! postaw blok        | Bot postawi blok w określonym miejscu.                                                                                               |
+| ! przywitaj się      | Bot wyśle wiadomość powitalną na czacie.                                                                                             |
+| ! śpij               | Bot pójdzie spać, jeśli jest noc i znajduje się w pobliżu łóżka.                                                                     |
+| ! śpij w łóżku       | Bot znajdzie najbliższe łóżko i położy się spać.                                                                                     |
+| ! przetop przedmiot  | Bot przetopi określony przedmiot w piecu, wykonując wszystkie niezbędne kroki.                                                       |
+| ! wyrzuć przedmiot   | Bot wyrzuci określony przedmiot ze swojego ekwipunku.                                                                                |
 | ! zrób żelazny kilof | Bot wykona wszystkie niezbędne kroki, aby stworzyć żelazny kilof, włącznie z wydobyciem surowców i stworzeniem potrzebnych narzędzi. |
 
 Pamiętaj, że bot będzie dążył do wykonania zadania, nawet jeśli wymaga to wielu kroków i czasu. To zachowanie pozwala na automatyzację złożonych zadań w grze.
